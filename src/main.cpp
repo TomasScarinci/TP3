@@ -11,8 +11,8 @@
 #include "SafeState.h"
 #include "icons.h"
 
-/* Locking mechanism definitions */
-#define SERVO_PIN 6
+/* Locking mechanism definitions *
+#define SERVO_PIN 6<7
 #define SERVO_LOCK_POS   20
 #define SERVO_UNLOCK_POS 90
 Servo lockServo;
@@ -48,7 +48,7 @@ void unlock() {
 
 void showStartupMessage() {
   lcd.setCursor(4, 0);
-  lcd.print("Welcome!");
+  lcd.print("Bienvenido!");
   delay(1000);
 
   lcd.setCursor(0, 2);
@@ -88,12 +88,12 @@ void showWaitScreen(int delayMillis) {
 bool setNewCode() {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Enter new code:");
+  lcd.print("Introduce un nuevo codigo:");
   String newCode = inputSecretCode();
 
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Confirm new code");
+  lcd.print("Confirma el nuevo codigo");
   String confirmCode = inputSecretCode();
 
   if (newCode.equals(confirmCode)) {
@@ -102,9 +102,9 @@ bool setNewCode() {
   } else {
     lcd.clear();
     lcd.setCursor(1, 0);
-    lcd.print("Code mismatch");
+    lcd.print("Los codigos no coinciden");
     lcd.setCursor(0, 1);
-    lcd.print("Safe not locked!");
+    lcd.print("La caja fuerte no esta bloqueada!");
     delay(2000);
     return false;
   }
@@ -115,7 +115,7 @@ void showUnlockMessage() {
   lcd.setCursor(0, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   lcd.setCursor(4, 0);
-  lcd.print("Unlocked!");
+  lcd.print("Desbloqueada!");
   lcd.setCursor(15, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   delay(1000);
@@ -127,7 +127,7 @@ void safeUnlockedLogic() {
   lcd.setCursor(0, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   lcd.setCursor(2, 0);
-  lcd.print(" # to lock");
+  lcd.print(" # para bloquear");
   lcd.setCursor(15, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
 
@@ -135,7 +135,7 @@ void safeUnlockedLogic() {
 
   if (safeState.hasCode()) {
     lcd.setCursor(0, 1);
-    lcd.print("  A = new code");
+    lcd.print("  A = Nuevo codigo");
     newCodeNeeded = false;
   }
 
@@ -168,7 +168,7 @@ void safeLockedLogic() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.write(ICON_LOCKED_CHAR);
-  lcd.print(" Safe Locked! ");
+  lcd.print(" Caja fuerte bloqueada! ");
   lcd.write(ICON_LOCKED_CHAR);
 
   String userCode = inputSecretCode();
@@ -181,7 +181,7 @@ void safeLockedLogic() {
   } else {
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("Access Denied!");
+    lcd.print("Acceso denegado!");
     showWaitScreen(1000);
   }
 }
