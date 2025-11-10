@@ -11,8 +11,8 @@
 #include "SafeState.h"
 #include "icons.h"
 
-/* Locking mechanism definitions *
-#define SERVO_PIN 6<7
+/* Locking mechanism definitions */
+#define SERVO_PIN 6<7 
 #define SERVO_LOCK_POS   20
 #define SERVO_UNLOCK_POS 90
 Servo lockServo;
@@ -88,12 +88,12 @@ void showWaitScreen(int delayMillis) {
 bool setNewCode() {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Introduce un nuevo codigo:");
+  lcd.print("Nuevo codigo:");
   String newCode = inputSecretCode();
 
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Confirma el nuevo codigo");
+  lcd.print("Repite codigo");
   String confirmCode = inputSecretCode();
 
   if (newCode.equals(confirmCode)) {
@@ -102,9 +102,9 @@ bool setNewCode() {
   } else {
     lcd.clear();
     lcd.setCursor(1, 0);
-    lcd.print("Los codigos no coinciden");
+    lcd.print("No coinciden");
     lcd.setCursor(0, 1);
-    lcd.print("La caja fuerte no esta bloqueada!");
+    lcd.print("Desbloqueado!");
     delay(2000);
     return false;
   }
@@ -114,8 +114,8 @@ void showUnlockMessage() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
-  lcd.setCursor(4, 0);
-  lcd.print("Desbloqueada!");
+  lcd.setCursor(2, 0);
+  lcd.print("Desbloqueado!");
   lcd.setCursor(15, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   delay(1000);
@@ -127,7 +127,7 @@ void safeUnlockedLogic() {
   lcd.setCursor(0, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   lcd.setCursor(2, 0);
-  lcd.print(" # para bloquear");
+  lcd.print(" # bloquear");
   lcd.setCursor(15, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
 
@@ -135,7 +135,7 @@ void safeUnlockedLogic() {
 
   if (safeState.hasCode()) {
     lcd.setCursor(0, 1);
-    lcd.print("  A = Nuevo codigo");
+    lcd.print("A = Nuevo codigo");
     newCodeNeeded = false;
   }
 
@@ -168,7 +168,7 @@ void safeLockedLogic() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.write(ICON_LOCKED_CHAR);
-  lcd.print(" Caja fuerte bloqueada! ");
+  lcd.print(" Bloqueado! ");
   lcd.write(ICON_LOCKED_CHAR);
 
   String userCode = inputSecretCode();
